@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Todo } from '../../../model'
+import './index.scss'
 
 interface Props {
   todo: Todo
@@ -21,12 +22,12 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
 
   const handleSubmit = (e: React.FormEvent, id: number) => {
     e.preventDefault()
-
-    setTodoList(
-      todoList.map((todo) =>
-        todo.id === id ? { ...todo, todo: editTodo } : todo
-      )
+    const newTodo = todoList.map((todo) =>
+      todo.id === id ? { ...todo, todo: editTodo } : todo
     )
+
+    localStorage.setItem('todo', JSON.stringify(newTodo))
+    setTodoList(newTodo)
     setIsEdit(false)
   }
 
@@ -37,20 +38,22 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
   }
 
   const handleDelete = (id: number) => {
-    setTodoList(todoList.filter((todo) => todo.id !== id))
+    const newTodo = todoList.filter((todo) => todo.id !== id)
+    localStorage.setItem('todo', JSON.stringify(newTodo))
+    setTodoList(newTodo)
   }
 
   const handleDone = (id: number) => {
     setIsEdit(false)
-    setTodoList(
-      todoList.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-      )
+    const newTodo = todoList.map((todo) =>
+      todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
     )
+    localStorage.setItem('todo', JSON.stringify(newTodo))
+    setTodoList(newTodo)
   }
 
   return (
-    <>
+    <div className={`todo__card${todo.isDone ? ' done' : ''}`}>
       <form onSubmit={(e) => handleSubmit(e, todo.id)}>
         {isEdit ? (
           <input
@@ -63,12 +66,18 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
           <span>{todo.todo}</span>
         )}
       </form>
-      <div>
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={() => handleDelete(todo.id)}>Delete</button>
-        <button onClick={() => handleDone(todo.id)}>Done</button>
+      <div className='todo__btn-container'>
+        <button className='btn' onClick={handleEdit}>
+          Edit
+        </button>
+        <button className='btn' onClick={() => handleDelete(todo.id)}>
+          Delete
+        </button>
+        <button className='btn' onClick={() => handleDone(todo.id)}>
+          {todo.isDone ? 'Undone' : 'Done'}
+        </button>
       </div>
-    </>
+    </div>
   )
 }
 

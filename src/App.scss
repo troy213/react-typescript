@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+.App {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 360px;
+  background-color: #f8f8f8;
+
+  & h1 {
+    color: #555555;
+    margin-bottom: 2rem;
+  }
+}
+
+.btn {
+  border: none;
+  background-color: #f0f0f0;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1),
+    -6px -6px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 3px rgba(255, 255, 255, 1),
+    inset -3px -3px 3px rgba(0, 0, 0, 0.1);
+  color: #555555;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.05),
+    -6px -6px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 3px rgba(255, 255, 255, 1),
+    inset -3px -3px 3px rgba(0, 0, 0, 0.05);
+  color: #888888;
+}
+
+.btn:active {
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.05),
+    -6px -6px 6px rgba(255, 255, 255, 1),
+    inset -3px -3px 3px rgba(255, 255, 255, 1),
+    inset 3px 3px 3px rgba(0, 0, 0, 0.05);
+  color: #888888;
+}

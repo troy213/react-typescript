@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputField, TodoList } from './components'
 import { Todo } from './model'
+import './App.scss'
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>('')
@@ -10,10 +11,18 @@ const App: React.FC = () => {
     e.preventDefault()
 
     if (todo) {
-      setTodoList([...todoList, { id: Date.now(), todo, isDone: false }])
+      const newTodo = [...todoList, { id: Date.now(), todo, isDone: false }]
+      localStorage.setItem('todo', JSON.stringify(newTodo))
+      setTodoList(newTodo)
       setTodo('')
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('todo')) {
+      setTodoList(JSON.parse(localStorage.getItem('todo') || ''))
+    }
+  }, [])
 
   return (
     <div className='App'>

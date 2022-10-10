@@ -1,0 +1,64 @@
+.todo__card {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1),
+    -6px -6px 6px rgba(255, 255, 255, 1), inset 3px 3px 6px rgba(0, 0, 0, 0.05),
+    inset -3px -3px 6px rgba(255, 255, 255, 1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  & span {
+    color: #555555;
+  }
+
+  & input {
+    outline: none;
+    height: 32px;
+    padding: 1em;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+      inset -3px -3px 6px rgba(255, 255, 255, 1);
+    background-color: #f0f0f0;
+    width: 100%;
+  }
+
+  &.done {
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.025),
+      -6px -6px 6px rgba(255, 255, 255, 0.5),
+      inset 6px 6px 12px rgba(0, 0, 0, 0.025),
+      inset -6px -6px 12px rgba(255, 255, 255, 0.5);
+
+    & span {
+      color: #aaaaaa;
+      text-decoration: line-through;
+    }
+
+    & .btn:first-child {
+      color: #aaaaaa;
+      cursor: default;
+
+      &:hover {
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1),
+          -6px -6px 6px rgba(255, 255, 255, 1),
+          inset 3px 3px 3px rgba(255, 255, 255, 1),
+          inset -3px -3px 3px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+.todo__btn-container {
+  margin-top: 1.5rem;
+  & > button {
+    padding: 0.75em;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  & > button:first-child {
+    margin-left: 0;
+  }
+}

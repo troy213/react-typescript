@@ -1,4 +1,5 @@
 import React from 'react'
+import './index.scss'
 
 interface Props {
   todo: string
@@ -18,7 +19,7 @@ const InputField: React.FC<Props> = (props: Props) => {
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
       />
-      <button className='input_submit' type='submit'>
+      <button className='btn btn__submit' type='submit'>
         Go
       </button>
     </form>
