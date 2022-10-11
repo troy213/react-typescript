@@ -1,4 +1,5 @@
 .todo__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 1.5rem 0;
@@ -7,7 +8,6 @@
     -6px -6px 6px rgba(255, 255, 255, 1), inset 3px 3px 6px rgba(0, 0, 0, 0.05),
     inset -3px -3px 6px rgba(255, 255, 255, 1);
   border-radius: 0.5rem;
-  overflow: hidden;
 
   & span {
     color: #555555;
@@ -30,6 +30,24 @@
       -6px -6px 6px rgba(255, 255, 255, 0.5),
       inset 6px 6px 12px rgba(0, 0, 0, 0.025),
       inset -6px -6px 12px rgba(255, 255, 255, 0.5);
+
+    &::after {
+      content: '✔';
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      color: #555555;
+      height: 30px;
+      width: 30px;
+      right: -8px;
+      border-radius: 0.5rem;
+      background-color: #fafafa;
+      box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.05),
+        -6px -6px 6px rgba(255, 255, 255, 0.5),
+        inset 6px 6px 12px rgba(0, 0, 0, 0.05),
+        inset -6px -6px 12px rgba(255, 255, 255, 0.5);
+    }
 
     & span {
       color: #aaaaaa;

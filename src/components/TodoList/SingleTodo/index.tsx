@@ -52,13 +52,20 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
     setTodoList(newTodo)
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const format = /^[a-zA-Z0-9 ]{0,25}$/
+    if (format.test(e.target.value)) {
+      setEditTodo(e.target.value)
+    }
+  }
+
   return (
     <div className={`todo__card${todo.isDone ? ' done' : ''}`}>
       <form onSubmit={(e) => handleSubmit(e, todo.id)}>
         {isEdit ? (
           <input
             value={editTodo}
-            onChange={(e) => setEditTodo(e.target.value)}
+            onChange={handleChange}
             onBlur={(e) => handleSubmit(e, todo.id)}
             ref={inputRef}
           />

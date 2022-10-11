@@ -10,6 +10,13 @@ interface Props {
 const InputField: React.FC<Props> = (props: Props) => {
   const { todo, setTodo, handleSubmit } = props
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const format = /^[a-zA-Z0-9 ]{0,25}$/
+    if (format.test(e.target.value)) {
+      setTodo(e.target.value)
+    }
+  }
+
   return (
     <form className='input' onSubmit={handleSubmit}>
       <input
@@ -17,7 +24,7 @@ const InputField: React.FC<Props> = (props: Props) => {
         placeholder='Enter a task'
         className='input__box'
         value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        onChange={handleChange}
       />
       <button className='btn btn__submit' type='submit'>
         Go
