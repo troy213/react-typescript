@@ -11,7 +11,7 @@ const InputField: React.FC<Props> = (props: Props) => {
   const { todo, setTodo, handleSubmit } = props
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const format = /^[a-zA-Z0-9 ]{0,25}$/
+    const format = /^[a-zA-Z0-9! ]{0,25}$/
     if (format.test(e.target.value)) {
       setTodo(e.target.value)
     }

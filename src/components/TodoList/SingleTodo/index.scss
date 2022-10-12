@@ -8,6 +8,7 @@
     -6px -6px 6px rgba(255, 255, 255, 1), inset 3px 3px 6px rgba(0, 0, 0, 0.05),
     inset -3px -3px 6px rgba(255, 255, 255, 1);
   border-radius: 0.5rem;
+  background-color: #f0f0f0;
 
   & span {
     color: #555555;
@@ -52,18 +53,6 @@
     & span {
       color: #aaaaaa;
       text-decoration: line-through;
-    }
-
-    & .btn:first-child {
-      color: #aaaaaa;
-      cursor: default;
-
-      &:hover {
-        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1),
-          -6px -6px 6px rgba(255, 255, 255, 1),
-          inset 3px 3px 3px rgba(255, 255, 255, 1),
-          inset -3px -3px 3px rgba(0, 0, 0, 0.1);
-      }
     }
   }
 }

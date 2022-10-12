@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Draggable } from 'react-beautiful-dnd'
 import { Todo } from '../../../model'
 import './index.scss'
 
 interface Props {
+  index: number
   todo: Todo
   todoList: Todo[]
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
 const SingleTodo: React.FC<Props> = (props: Props) => {
-  const { todo, todoList, setTodoList } = props
+  const { todo, todoList, setTodoList, index } = props
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [editTodo, setEditTodo] = useState<string>(todo.todo)
@@ -53,38 +55,49 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const format = /^[a-zA-Z0-9 ]{0,25}$/
+    const format = /^[a-zA-Z0-9! ]{0,25}$/
     if (format.test(e.target.value)) {
       setEditTodo(e.target.value)
     }
   }
 
   return (
-    <div className={`todo__card${todo.isDone ? ' done' : ''}`}>
-      <form onSubmit={(e) => handleSubmit(e, todo.id)}>
-        {isEdit ? (
-          <input
-            value={editTodo}
-            onChange={handleChange}
-            onBlur={(e) => handleSubmit(e, todo.id)}
-            ref={inputRef}
-          />
-        ) : (
-          <span>{todo.todo}</span>
-        )}
-      </form>
-      <div className='todo__btn-container'>
-        <button className='btn' onClick={handleEdit}>
-          Edit
-        </button>
-        <button className='btn' onClick={() => handleDelete(todo.id)}>
-          Delete
-        </button>
-        <button className='btn' onClick={() => handleDone(todo.id)}>
-          {todo.isDone ? 'Undone' : 'Done'}
-        </button>
-      </div>
-    </div>
+    <Draggable draggableId={todo.id.toString()} index={index}>
+      {(provided) => (
+        <div
+          className={`todo__card${todo.isDone ? ' done' : ''}`}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <form onSubmit={(e) => handleSubmit(e, todo.id)}>
+            {isEdit ? (
+              <input
+                value={editTodo}
+                onChange={handleChange}
+                onBlur={(e) => handleSubmit(e, todo.id)}
+                ref={inputRef}
+              />
+            ) : (
+              <span>{todo.todo}</span>
+            )}
+          </form>
+          <div className='todo__btn-container'>
+            {!todo.isDone && (
+              <button className='btn' onClick={handleEdit}>
+                Edit
+              </button>
+            )}
+            <button className='btn' onClick={() => handleDelete(todo.id)}>
+              Delete
+            </button>
+            <button className='btn' onClick={() => handleDone(todo.id)}>
+              {todo.isDone ? 'Undone' : 'Done'}
+            </button>
+          </div>
+        </div>
+      )}
+    </Draggable>
   )
 }
 
