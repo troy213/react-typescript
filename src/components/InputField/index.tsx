@@ -7,12 +7,17 @@ interface Props {
   handleSubmit: (e: React.FormEvent) => void
 }
 
+const validation = (maxLength: number) => {
+  const expression = '^[a-zA-Z0-9!& ]{0,' + maxLength + '}$'
+  const regex = new RegExp(expression)
+  return regex
+}
+
 const InputField: React.FC<Props> = (props: Props) => {
   const { todo, setTodo, handleSubmit } = props
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const format = /^[a-zA-Z0-9! ]{0,25}$/
-    if (format.test(e.target.value)) {
+    if (validation(255).test(e.target.value)) {
       setTodo(e.target.value)
     }
   }

@@ -10,6 +10,12 @@ interface Props {
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
+const validation = (maxLength: number) => {
+  const expression = '^[a-zA-Z0-9!& ]{0,' + maxLength + '}$'
+  const regex = new RegExp(expression)
+  return regex
+}
+
 const SingleTodo: React.FC<Props> = (props: Props) => {
   const { todo, todoList, setTodoList, index } = props
 
@@ -55,8 +61,7 @@ const SingleTodo: React.FC<Props> = (props: Props) => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const format = /^[a-zA-Z0-9! ]{0,25}$/
-    if (format.test(e.target.value)) {
+    if (validation(255).test(e.target.value)) {
       setEditTodo(e.target.value)
     }
   }
